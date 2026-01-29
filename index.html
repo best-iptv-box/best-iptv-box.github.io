@@ -1,396 +1,192 @@
-import { useState, useEffect } from 'react';
-import { 
-  Tv, 
-  Check, 
-  Zap, 
-  Globe, 
-  ShieldCheck, 
-  PlayCircle, 
-  ChevronDown, 
-  Menu,
-  X,
-  Star,
-  Smartphone
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Best IPTV Box 2026 – Ultimate Streaming Experience</title>
+  <meta name="description" content="Discover the best IPTV box in 2026. Compare pricing, features, pros & cons, and choose the ultimate IPTV solution for streaming." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-// --- Types ---
-interface PricingPlan {
-  name: string;
-  price: string;
-  period: string;
-  monthlyNote?: string;
-  features: string[];
-  popular?: boolean;
-}
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-// --- Components ---
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-md py-3 border-b border-white/10' : 'bg-transparent py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <div className="bg-orange-500 p-2 rounded-lg shadow-lg shadow-orange-500/20">
-            <Tv className="text-white w-6 h-6" />
-          </div>
-          <span className="text-2xl font-black text-white tracking-tighter uppercase">IPTV<span className="text-orange-500">Box</span></span>
-        </div>
-
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="#features" className="text-gray-300 hover:text-orange-500 font-medium transition-colors">Features</a>
-          <a href="#comparison" className="text-gray-300 hover:text-orange-500 font-medium transition-colors">Comparison</a>
-          <a href="#pricing" className="text-gray-300 hover:text-orange-500 font-medium transition-colors">Pricing</a>
-          <a href="#faq" className="text-gray-300 hover:text-orange-500 font-medium transition-colors">FAQ</a>
-          <button className="bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 px-6 rounded-full transition-all">
-            Get Started
-          </button>
-        </div>
-
-        <button className="md:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-black border-b border-white/10 p-4 space-y-4 md:hidden"
-          >
-            <a href="#features" className="block text-gray-300 py-2" onClick={() => setIsOpen(false)}>Features</a>
-            <a href="#comparison" className="block text-gray-300 py-2" onClick={() => setIsOpen(false)}>Comparison</a>
-            <a href="#pricing" className="block text-gray-300 py-2" onClick={() => setIsOpen(false)}>Pricing</a>
-            <a href="#faq" className="block text-gray-300 py-2" onClick={() => setIsOpen(false)}>FAQ</a>
-            <button className="w-full bg-orange-500 text-black font-bold py-3 rounded-lg">Get Started</button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-  );
-};
-
-const Hero = () => {
-  const [index, setIndex] = useState(0);
-  const slides = [
-    'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=2000&q=80',
-    'https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=2000&q=80',
-    'https://images.unsplash.com/photo-1605902711622-cfb43c44367f?auto=format&fit=crop&w=2000&q=80'
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => setIndex((i) => (i + 1) % slides.length), 5000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  return (
-    <div className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-black">
-      {slides.map((src, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: index === i ? 1 : 0 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 z-0"
-          style={{ 
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(${src})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        />
-      ))}
-
-      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/20 text-orange-500 border border-orange-500/30 text-sm font-bold mb-8 uppercase tracking-widest">
-            Best IPTV Box 2026 Guide
-          </span>
-          <h1 className="text-5xl md:text-8xl font-black text-white mb-8 leading-tight tracking-tighter">
-            The Ultimate <span className="text-orange-500">Streaming</span> Experience
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
-            Discover the definitive guide to choosing the best IPTV box. In-depth reviews, expert comparisons, and high-performance solutions.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href="#pricing" className="bg-orange-500 hover:bg-orange-600 text-black font-black px-10 py-5 rounded-2xl text-lg transition-all shadow-xl shadow-orange-500/20 w-full sm:w-auto">
-              View IPTV Pricing
-            </a>
-            <a href="#faq" className="bg-white/10 hover:bg-white/20 text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all border border-white/10 backdrop-blur-sm w-full sm:w-auto">
-              Common Questions
-            </a>
-          </div>
-        </motion.div>
-      </div>
-
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
-        {slides.map((_, i) => (
-          <button key={i} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full transition-all ${index === i ? 'bg-orange-500 w-10' : 'bg-white/30 hover:bg-white/50'}`} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Features = () => {
-  const items = [
-    { icon: Globe, title: "Global Access", desc: "Thousands of channels from every continent, including all major sports and networks." },
-    { icon: Zap, title: "Blazing Speed", desc: "Powered by high-performance servers for instant switching and zero buffering." },
-    { icon: PlayCircle, title: "4K Support", desc: "Crystal clear UHD and 4K resolution supported on all compatible devices." },
-    { icon: Smartphone, title: "Multi-Device", desc: "Firestick, Android, iOS, Smart TV — enjoy your content anywhere, anytime." },
-    { icon: Star, title: "Premium VOD", desc: "Access a massive library of the latest movies and trending series on-demand." },
-    { icon: ShieldCheck, title: "Secure & Easy", desc: "Setup in minutes with industry-standard security and 24/7 technical support." }
-  ];
-
-  return (
-    <section id="features" className="py-24 bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-6xl font-black text-white mb-8">Why Choose Our Recommended Box?</h2>
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-16 leading-relaxed">
-          Traditional cable is outdated. The best IPTV box provides a faster, cheaper, and more comprehensive experience for modern viewers.
-        </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {items.map((item, i) => (
-            <div key={i} className="bg-zinc-900/50 border border-white/5 p-10 rounded-3xl hover:bg-zinc-800/80 transition-all text-left group">
-              <div className="bg-orange-500/10 w-16 h-16 flex items-center justify-center rounded-2xl mb-8 group-hover:bg-orange-500/20 transition-colors">
-                <item.icon className="text-orange-500 w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-              <p className="text-gray-400 leading-relaxed text-lg">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Comparison = () => {
-  const data = [
-    { pro: "Thousands of Live Channels", con: "Needs High-Speed Internet" },
-    { pro: "90% Cheaper than Cable", con: "Setup Requires Minimal Skill" },
-    { pro: "4K & HDR Support", con: "Server Quality Can Vary" },
-    { pro: "Watch on Any Device", con: "Occasional App Updates Needed" }
-  ];
-
-  return (
-    <section id="comparison" className="py-24 bg-black">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-black text-white mb-16 uppercase tracking-tight">Pros vs Cons</h2>
-        <div className="grid lg:grid-cols-2 gap-12 text-left">
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-green-500 mb-8 flex items-center">
-              <div className="w-12 h-1 bg-green-500 mr-4 rounded-full" /> The Advantages
-            </h3>
-            {data.map((item, i) => (
-              <div key={i} className="bg-zinc-900 p-8 rounded-2xl flex items-start space-x-5 border-l-4 border-green-500">
-                <Check className="text-green-500 w-6 h-6 flex-shrink-0 mt-1" />
-                <p className="text-xl font-bold text-white">{item.pro}</p>
-              </div>
-            ))}
-          </div>
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-500 mb-8 flex items-center">
-              <div className="w-12 h-1 bg-gray-500 mr-4 rounded-full" /> The Reality
-            </h3>
-            {data.map((item, i) => (
-              <div key={i} className="bg-zinc-900 p-8 rounded-2xl flex items-start space-x-5 border-l-4 border-zinc-700">
-                <X className="text-zinc-600 w-6 h-6 flex-shrink-0 mt-1" />
-                <p className="text-xl font-bold text-gray-400">{item.con}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Pricing = () => {
-  const plans: PricingPlan[] = [
-    {
-      name: "Starter",
-      price: "$15",
-      period: "/ month",
-      features: ["Full Access", "HD Streams", "24/7 Support", "1 Connection"]
-    },
-    {
-      name: "Standard",
-      price: "$45",
-      period: "/ 6 mo",
-      monthlyNote: "$7.50 / month",
-      popular: true,
-      features: ["4K Resolution", "2 Connections", "Priority Support", "EPG Guide"]
-    },
-    {
-      name: "Ultimate",
-      price: "$70",
-      period: "/ year",
-      monthlyNote: "$5.83 / month",
-      features: ["All Features", "3 Connections", "Sports Channels", "VOD Library"]
+  <style>
+    .slide {
+      transition: opacity 1.5s ease-in-out;
     }
-  ];
+  </style>
+</head>
 
-  return (
-    <section id="pricing" className="py-24 bg-zinc-950">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl md:text-6xl font-black text-white text-center mb-16">IPTV Pricing Plans</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {plans.map((plan, i) => (
-            <div key={i} className={`relative p-10 rounded-[2.5rem] flex flex-col ${plan.popular ? 'bg-orange-500 text-black shadow-2xl scale-105 z-10' : 'bg-zinc-900 text-white'}`}>
-              <h3 className="text-2xl font-bold mb-6">{plan.name}</h3>
-              <div className="mb-8">
-                <span className="text-6xl font-black">{plan.price}</span>
-                <span className="text-lg opacity-70 ml-2">{plan.period}</span>
-                {plan.monthlyNote && <p className="mt-2 font-bold opacity-80">{plan.monthlyNote}</p>}
-              </div>
-              <ul className="space-y-4 mb-10 flex-grow">
-                {plan.features.map((f, idx) => (
-                  <li key={idx} className="flex items-center font-medium">
-                    <Check className={`w-5 h-5 mr-3 ${plan.popular ? 'text-black' : 'text-orange-500'}`} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <button className={`w-full py-5 rounded-2xl font-black text-lg transition-transform hover:scale-105 ${plan.popular ? 'bg-black text-white' : 'bg-orange-500 text-black'}`}>
-                Choose {plan.name}
-              </button>
-            </div>
-          ))}
-        </div>
+<body class="bg-black text-white font-sans">
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed w-full z-50 transition-all py-5">
+  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <div class="bg-orange-500 p-2 rounded-lg">
+        <i data-lucide="tv"></i>
       </div>
-    </section>
-  );
-};
-
-const FAQ = () => {
-  const [open, setOpen] = useState<number | null>(null);
-  const items = [
-    { q: "What is IPTV?", a: "IPTV (Internet Protocol Television) delivers content via the internet instead of traditional cable or satellite. It offers more flexibility and usually a much larger channel selection." },
-    { q: "Is IPTV legal?", a: "The technology is 100% legal. Legality depends on whether the provider has the proper broadcasting licenses for the content they offer. Always choose reputable, licensed providers." },
-    { q: "Can I use it on Firestick?", a: "Absolutely. Firestick is one of the most popular devices for IPTV. You can install apps like IPTV Smarters Pro or TiviMate using the Downloader app in minutes." },
-    { q: "Do I need a VPN?", a: "While not strictly required, a VPN is highly recommended for privacy and to bypass any potential ISP throttling while streaming high-quality 4K content." }
-  ];
-
-  return (
-    <section id="faq" className="py-24 bg-black">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-black text-white text-center mb-16">Frequently Asked Questions</h2>
-        <div className="space-y-4 mb-24">
-          {items.map((item, i) => (
-            <div key={i} className="bg-zinc-900 rounded-2xl overflow-hidden border border-white/5">
-              <button onClick={() => setOpen(open === i ? null : i)} className="w-full p-6 text-left flex justify-between items-center group">
-                <span className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors">{item.q}</span>
-                <ChevronDown className={`text-orange-500 transition-transform ${open === i ? 'rotate-180' : ''}`} />
-              </button>
-              {open === i && (
-                <div className="px-6 pb-6 text-gray-400 text-lg leading-relaxed animate-in fade-in slide-in-from-top-1 duration-300">
-                  {item.a}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="prose prose-invert prose-orange max-w-none bg-zinc-900/30 p-10 rounded-[2.5rem] border border-white/5">
-          <h2 className="text-3xl font-black text-white mb-8">Detailed Guide: Choosing the Best IPTV Box</h2>
-          <p className="text-gray-400 text-lg leading-relaxed mb-6">
-            Choosing the <strong className="text-orange-500">best IPTV box</strong> involves evaluating several factors: hardware performance, software compatibility, ease of setup, customer support, and of course, the quality of the IPTV service itself. Modern IPTV boxes are designed to work seamlessly with popular IPTV players such as <strong>IPTV Smarters Pro</strong>, <strong>TiviMate</strong>, and <strong>XCIPTV</strong>.
-          </p>
-          <div className="grid md:grid-cols-2 gap-10 mt-12">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">1. Hardware Specs</h3>
-              <p className="text-gray-400">A powerful processor (Quad-core or higher) and sufficient RAM (at least 2GB) ensure smooth navigation and quick channel switching. Storage (8GB+) allows for app installations and buffering.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">2. Software & Ecosystem</h3>
-              <p className="text-gray-400">The best IPTV boxes run Android TV OS or a certified Android version, giving access to the Google Play Store. This enables you to install any streaming app you need.</p>
-            </div>
-          </div>
-          <p className="text-gray-400 text-lg leading-relaxed mt-10">
-            By considering these factors, you can select an IPTV box that delivers a premium, reliable, and legal streaming experience. Remember to start with a short-term subscription to test the service, ensure your internet connection meets the requirements (at least 25 Mbps for 4K streaming), and always use a VPN for added privacy.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="bg-zinc-950 py-20 px-4 border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-16 mb-16">
-          <div className="col-span-1">
-            <div className="flex items-center space-x-2 mb-8">
-              <div className="bg-orange-500 p-2 rounded-lg">
-                <Tv className="text-white w-6 h-6" />
-              </div>
-              <span className="text-2xl font-black text-white tracking-tighter uppercase">IPTV<span className="text-orange-500">Box</span></span>
-            </div>
-            <p className="text-gray-500 leading-relaxed mb-8">The ultimate resource for IPTV enthusiasts. Providing the latest guides, reviews, and pricing for the best IPTV boxes in 2026.</p>
-            <div className="flex space-x-4">
-               <div className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-orange-500 transition-all cursor-pointer"><Globe className="w-5 h-5 text-gray-400" /></div>
-               <div className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-orange-500 transition-all cursor-pointer"><Smartphone className="w-5 h-5 text-gray-400" /></div>
-               <div className="w-10 h-10 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-orange-500 transition-all cursor-pointer"><Star className="w-5 h-5 text-gray-400" /></div>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-white font-black text-lg mb-8 uppercase tracking-widest">Navigation</h4>
-            <ul className="space-y-4 text-gray-500">
-              <li><a href="#features" className="hover:text-orange-500 transition-colors">Key Features</a></li>
-              <li><a href="#pricing" className="hover:text-orange-500 transition-colors">Pricing Plans</a></li>
-              <li><a href="#faq" className="hover:text-orange-500 transition-colors">Support FAQ</a></li>
-              <li><a href="#comparison" className="hover:text-orange-500 transition-colors">Pros & Cons</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-black text-lg mb-8 uppercase tracking-widest">About</h4>
-            <ul className="space-y-4 text-gray-500">
-              <li><a href="#" className="hover:text-orange-500 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">Affiliate Disclaimer</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="pt-8 border-t border-white/5 text-center text-gray-600 text-sm">
-          <p>© 2026 Best IPTV Box Guide. All rights reserved. This site is for informational purposes only. We are not a service provider.</p>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export function App() {
-  return (
-    <div className="bg-black text-white font-sans selection:bg-orange-500 selection:text-black">
-      <Navbar />
-      <Hero />
-      <Features />
-      <Comparison />
-      <Pricing />
-      <FAQ />
-      <section className="py-24 bg-gradient-to-b from-black to-zinc-900 border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">Cut the Cord Today and <span className="text-orange-500">Save Big</span></h2>
-          <p className="text-xl text-gray-400 mb-12">Stop overpaying for limited cable packages. Get global access, better quality, and ultimate freedom with the best IPTV solutions.</p>
-          <button className="bg-orange-500 hover:bg-orange-600 text-black font-black px-12 py-6 rounded-3xl text-2xl transition-all shadow-2xl shadow-orange-500/20 transform hover:scale-105">
-            Claim Your Discount
-          </button>
-        </div>
-      </section>
-      <Footer />
+      <span class="text-2xl font-black uppercase">IPTV<span class="text-orange-500">Box</span></span>
     </div>
-  );
-}
+
+    <div class="hidden md:flex space-x-8">
+      <a href="#features" class="text-gray-300 hover:text-orange-500">Features</a>
+      <a href="#pricing" class="text-gray-300 hover:text-orange-500">Pricing</a>
+      <a href="#faq" class="text-gray-300 hover:text-orange-500">FAQ</a>
+    </div>
+
+    <button id="menuBtn" class="md:hidden">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden bg-black border-t border-white/10 p-6 md:hidden">
+    <a href="#features" class="block py-2">Features</a>
+    <a href="#pricing" class="block py-2">Pricing</a>
+    <a href="#faq" class="block py-2">FAQ</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <div id="slides" class="absolute inset-0">
+    <div class="slide absolute inset-0 bg-cover bg-center opacity-100"
+      style="background-image:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url('https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04')"></div>
+    <div class="slide absolute inset-0 bg-cover bg-center opacity-0"
+      style="background-image:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url('https://images.unsplash.com/photo-1593784991095-a205069470b6')"></div>
+    <div class="slide absolute inset-0 bg-cover bg-center opacity-0"
+      style="background-image:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url('https://images.unsplash.com/photo-1605902711622-cfb43c44367f')"></div>
+  </div>
+
+  <div class="relative z-10 text-center max-w-4xl px-4">
+    <span class="inline-block px-4 py-2 bg-orange-500/20 text-orange-500 rounded-full mb-6">
+      Best IPTV Box 2026
+    </span>
+    <h1 class="text-5xl md:text-7xl font-black mb-6">
+      Ultimate <span class="text-orange-500">Streaming</span> Experience
+    </h1>
+    <p class="text-xl text-gray-300 mb-10">
+      Compare the best IPTV boxes, pricing plans, and features for flawless streaming.
+    </p>
+    <a href="#pricing" class="bg-orange-500 text-black px-10 py-4 rounded-2xl font-black">
+      View Pricing
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-24 bg-zinc-950">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h2 class="text-4xl md:text-6xl font-black mb-16">Why Choose IPTV?</h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-zinc-900 p-8 rounded-3xl">
+        <h3 class="text-xl font-bold mb-3">Global Channels</h3>
+        <p class="text-gray-400">Thousands of live TV channels worldwide.</p>
+      </div>
+      <div class="bg-zinc-900 p-8 rounded-3xl">
+        <h3 class="text-xl font-bold mb-3">4K Streaming</h3>
+        <p class="text-gray-400">Ultra-HD quality with zero buffering.</p>
+      </div>
+      <div class="bg-zinc-900 p-8 rounded-3xl">
+        <h3 class="text-xl font-bold mb-3">Multi-Device</h3>
+        <p class="text-gray-400">Firestick, Android, Smart TV & more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-24 bg-black">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h2 class="text-4xl md:text-6xl font-black mb-16">Pricing Plans</h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-zinc-900 p-10 rounded-3xl">
+        <h3 class="text-2xl font-bold mb-4">Starter</h3>
+        <p class="text-5xl font-black mb-6">$15</p>
+        <ul class="text-gray-400 space-y-2 mb-6">
+          <li>HD Channels</li>
+          <li>1 Connection</li>
+          <li>Support</li>
+        </ul>
+        <button class="bg-orange-500 text-black px-6 py-3 rounded-xl font-bold">Choose</button>
+      </div>
+
+      <div class="bg-orange-500 text-black p-10 rounded-3xl scale-105">
+        <h3 class="text-2xl font-bold mb-4">Standard</h3>
+        <p class="text-5xl font-black mb-6">$45</p>
+        <ul class="space-y-2 mb-6">
+          <li>4K Channels</li>
+          <li>2 Connections</li>
+          <li>EPG Guide</li>
+        </ul>
+        <button class="bg-black text-white px-6 py-3 rounded-xl font-bold">Popular</button>
+      </div>
+
+      <div class="bg-zinc-900 p-10 rounded-3xl">
+        <h3 class="text-2xl font-bold mb-4">Ultimate</h3>
+        <p class="text-5xl font-black mb-6">$70</p>
+        <ul class="text-gray-400 space-y-2 mb-6">
+          <li>All Features</li>
+          <li>3 Connections</li>
+          <li>VOD Library</li>
+        </ul>
+        <button class="bg-orange-500 text-black px-6 py-3 rounded-xl font-bold">Choose</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 bg-zinc-950">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="text-4xl font-black text-center mb-16">FAQ</h2>
+
+    <details class="bg-zinc-900 p-6 rounded-xl mb-4">
+      <summary class="font-bold cursor-pointer">What is IPTV?</summary>
+      <p class="text-gray-400 mt-3">IPTV delivers TV content over the internet.</p>
+    </details>
+
+    <details class="bg-zinc-900 p-6 rounded-xl">
+      <summary class="font-bold cursor-pointer">Do I need a VPN?</summary>
+      <p class="text-gray-400 mt-3">A VPN is recommended for privacy and speed.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black py-10 text-center text-gray-500 text-sm">
+  © 2026 Best IPTV Box Guide. All rights reserved.
+</footer>
+
+<script>
+  lucide.createIcons();
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle(
+      'bg-black',
+      window.scrollY > 50
+    );
+  });
+
+  // Mobile menu
+  document.getElementById('menuBtn').onclick = () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  };
+
+  // Hero slider
+  let slides = document.querySelectorAll('.slide');
+  let index = 0;
+  setInterval(() => {
+    slides.forEach((s, i) => s.style.opacity = i === index ? 1 : 0);
+    index = (index + 1) % slides.length;
+  }, 5000);
+</script>
+
+</body>
+</html>
